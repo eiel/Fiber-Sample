@@ -2,6 +2,10 @@
 
 Ruby の Fiber クラスのサンプルです。
 
+## 発表スライド
+
+[slide share](http://www.slideshare.net/TomohikoHimura/hiroshimarb-027fiber)
+
 ## 実行方法
 
 ```
