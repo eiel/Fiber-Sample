@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.39 in css mode. -->
+<html>
+  <head>
+    <title>player_fiber.rb</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #eee;
+        background-color: #222;
+      }
+      .function-name {
+        /* font-lock-function-name-face */
+        color: #77B5FF;
+      }
+      .keyword {
+        /* font-lock-keyword-face */
+        color: #66c8ef;
+      }
+      .string {
+        /* font-lock-string-face */
+        color: #9aca7e;
+        background-color: #212A24;
+      }
+      .type {
+        /* font-lock-type-face */
+        color: #85FFDF;
+      }
+      .variable-name {
+        /* font-lock-variable-name-face */
+        color: #FFB14B;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+require <span class="string">'curses'</span>
+
+<span class="keyword">class</span> <span class="type">PlayerFiber</span>
+  <span class="keyword">def</span> <span class="function-name">initialize</span>
+    <span class="variable-name">@x</span> = 5
+    <span class="variable-name">@y</span> = 5
+  <span class="keyword">end</span>
+
+  <span class="keyword">def</span> <span class="function-name">step</span>
+    fiber.resume
+  <span class="keyword">end</span>
+
+  <span class="keyword">def</span> <span class="function-name">fiber</span>
+    <span class="variable-name">@fiber</span> ||= <span class="type">Fiber</span>.new <span class="keyword">do</span>
+      loop <span class="keyword">do</span>
+        <span class="variable-name">@x</span> = 5
+        <span class="variable-name">@y</span> = 5
+
+        10.times <span class="keyword">do</span>
+          <span class="variable-name">@x</span> += 1
+          <span class="type">Fiber</span>.yield
+        <span class="keyword">end</span>
+
+        10.times <span class="keyword">do</span>
+          <span class="variable-name">@y</span> += 1
+          <span class="type">Fiber</span>.yield
+        <span class="keyword">end</span>
+
+        10.times <span class="keyword">do</span>
+          <span class="variable-name">@x</span> -= 1
+          <span class="type">Fiber</span>.yield
+        <span class="keyword">end</span>
+
+        10.times <span class="keyword">do</span>
+          <span class="variable-name">@y</span> -= 1
+          <span class="type">Fiber</span>.yield
+        <span class="keyword">end</span>
+      <span class="keyword">end</span>
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+
+  <span class="keyword">def</span> <span class="function-name">draw</span>
+    <span class="type">Curses</span>.setpos(<span class="variable-name">@x</span>,<span class="variable-name">@y</span>)
+    <span class="type">Curses</span>.addstr(<span class="string">'*'</span>)
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre>
+  </body>
+</html>
